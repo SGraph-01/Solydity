@@ -17,3 +17,35 @@ interface IAlgebra {
 
   function liquidity() external view returns (uint128);
 }
+
+interface IUniswapV3 {
+  //pool
+  function slot0()
+        external
+        view
+        returns (
+            uint160 sqrtPriceX96,
+            int24 tick,
+            uint16 observationIndex,
+            uint16 observationCardinality,
+            uint16 observationCardinalityNext,
+            uint8 feeProtocol,
+            bool unlocked
+        );
+
+  function liquidity() external view returns (uint128);
+
+  //callback
+  function flash(
+        address recipient,
+        uint256 amount0,
+        uint256 amount1,
+        bytes calldata data
+    ) external;
+
+  function uniswapV3FlashCallback(
+        uint256 fee0,
+        uint256 fee1,
+        bytes calldata data
+    ) external;
+}
