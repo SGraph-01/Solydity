@@ -59,11 +59,12 @@ contract math {
         }
     }
 
-    //execution cost 967 gas
+    //execution cost 981 gas
     // Check for overflow
     function mul3(uint x, uint y) public pure returns (uint z) {
         assembly {
-            switch iszero(x)
+            let isZero := or(iszero(x), iszero(y))
+            switch isZero
             case 1 {
                 z := 0
             }
